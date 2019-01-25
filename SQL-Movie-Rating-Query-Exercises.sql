@@ -21,7 +21,8 @@ FROM Movie
 WHERE mID not in (SELECT mID FROM Rating);
 
 -- Q4
--- Some reviewers didn't provide a date with their rating. Find the names of all reviewers who have ratings with a NULL value for the date.
+-- Some reviewers didn't provide a date with their rating. 
+-- Find the names of all reviewers who have ratings with a NULL value for the date.
 
 SELECT name
 FROM Reviewer, Rating
@@ -59,7 +60,8 @@ GROUP BY Movie.mID
 ORDER BY title;
 
 -- Q8
--- For each movie, return the title and the 'rating spread', that is, the difference between highest and lowest ratings given to that movie. 
+-- For each movie, return the title and the 'rating spread', that is, the difference between highest 
+-- and lowest ratings given to that movie. 
 -- Sort by rating spread from highest to lowest, then by movie title.
 
 SELECT title, (MAX(stars) - MIN(stars)) AS rating_spread
