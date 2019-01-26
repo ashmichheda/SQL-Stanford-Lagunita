@@ -86,7 +86,76 @@ FROM (SELECT rID
 		GROUP BY rID
 		HAVING COUNT(*) >= 3) t, Reviewer rev
 WHERE rev.rID = t.rID;               
-               
-               
+        
+			
+			
+-- Q9
+-- Some directors directed more than one movie. For all such directors, return the titles of all movies directed by them, along with the director name. 
+-- Sort by director name, then movie title. (As an extra challenge, try writing the query both with and without COUNT.) 
+
+
+SELECT m.title, m.director 
+FROM (SELECT director
+		FROM Movie
+		GROUP BY director
+		HAVING COUNT(*) > 1) t, Movie m
+WHERE m.director = t.director;
+
+			
+-- Q10
+-- Find the movie(s) with the highest average rating. 
+-- Return the movie title(s) and average rating. 
+-- (Hint: This query is more difficult to write in SQLite than other systems; 
+-- you might think of it as finding the highest average rating 
+-- and then choosing the movie(s) with that average rating.) 
+
+
+SELECT title, AVG(stars) AS average
+FROM Movie
+INNER JOIN Rating USING(mId)
+GROUP BY mId
+HAVING average = (
+  SELECT MAX(average_stars)
+  FROM (
+    SELECT title, AVG(stars) AS average_stars
+    FROM Movie
+    INNER JOIN Rating USING(mId)
+    GROUP BY mId
+  )
+);
+
+-- Q11
+-- Find the movie(s) with the lowest average rating. 
+-- Return the movie title(s) and average rating. 
+-- (Hint: This query may be more difficult to write in SQLite than other systems; 
+-- you might think of it as finding the lowest average rating 
+-- and then choosing the movie(s) with that average rating.) 
+
+SELECT title, AVG(stars) AS average
+FROM Movie
+INNER JOIN Rating USING(mId)
+GROUP BY mId
+HAVING average = (
+  SELECT MIN(average_stars)
+  FROM (
+    SELECT title, AVG(stars) AS average_stars
+    FROM Movie
+    INNER JOIN Rating USING(mId)
+    GROUP BY mId
+  )
+);
+
+-- Q12
+-- For each director, return the director's name together with the title(s) 
+-- of the movie(s) 
+-- they directed that received the highest rating among all of their movies, 
+-- and the value of that rating. Ignore movies whose director is NULL. 
+
+SELECT m1.director, MAX(r1.stars), m1.title
+FROM Movie m1, Rating r1
+WHERE m1.mID = r.mID
+AND m1.director is not NULL;
+			
+			
                
                
