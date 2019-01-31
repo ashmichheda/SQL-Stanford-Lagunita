@@ -20,6 +20,7 @@ SELECT title
 FROM Movie
 WHERE mID not in (SELECT mID FROM Rating);
 
+
 -- Q4
 -- Some reviewers didn't provide a date with their rating. 
 -- Find the names of all reviewers who have ratings with a NULL value for the date.
@@ -27,6 +28,7 @@ WHERE mID not in (SELECT mID FROM Rating);
 SELECT name
 FROM Reviewer, Rating
 WHERE Reviewer.rID = Rating.rID and ratingDate is NULL;
+
 
 -- Q5
 -- Write a query to return the ratings data in a more readable format: reviewer name, movie title, stars, and ratingDate. 
@@ -37,10 +39,10 @@ FROM Movie, Reviewer, Rating
 WHERE Movie.mID = Rating.mID and Reviewer.rID = Rating.rID
 ORDER BY name, title, stars;
 
+
 -- Q6
 -- For all cases where the same reviewer rated the same movie twice 
 -- and gave it a higher rating the second time, return the reviewer's name and the title of the movie.
-
 
 SELECT name, title
 FROM Movie
@@ -48,6 +50,7 @@ INNER JOIN Rating R1 USING(mId)
 INNER JOIN Rating R2 USING(rId)
 INNER JOIN Reviewer USING(rId)
 WHERE R1.mId = R2.mId AND R1.ratingDate < R2.ratingDate AND R1.stars < R2.stars;
+
 
 -- Q7
 -- For each movie that has at least one rating, find the highest number of stars that movie received. 
@@ -58,6 +61,7 @@ FROM Movie, Rating
 WHERE Movie.mID = Rating.mID and stars >=1
 GROUP BY Movie.mID
 ORDER BY title;
+
 
 -- Q8
 -- For each movie, return the title and the 'rating spread', that is, the difference between highest 
