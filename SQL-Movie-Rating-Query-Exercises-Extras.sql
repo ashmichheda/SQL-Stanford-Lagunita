@@ -30,6 +30,7 @@ UNION
 SELECT m.title FROM Movie m
 ORDER BY rev.name;
 
+	       
 -- Q4
 -- Find the titles of all movies not reviewed by Chris Jackson.
 
@@ -41,6 +42,7 @@ WHERE r.rID = (SELECT rev.rID
 FROM Reviewer rev
 WHERE rev.name = 'Chris Jackson'));
 
+	       
 -- Q5
 -- For all pairs of reviewers such that both reviewers gave a rating to the same movie, return the names of both reviewers. 
 -- Eliminate duplicates, don't pair reviewers with themselves, and include each pair only once. 
@@ -53,6 +55,7 @@ AND r2.rID = rev2.rID
 AND r1.mID = r2.mID
 AND rev1.name < rev2.name;
 
+	       
 -- Q6
 -- For each rating that is the lowest (fewest stars) currently in the database, 
 -- return the reviewer name, movie title, and number of stars. 
@@ -65,6 +68,7 @@ SELECT r.name,
          WHERE stars = (SELECT MIN(stars) FROM rating)) t, Movie m, Reviewer r
   WHERE r.rID = t.rID and m.mID = t.mID;
   
+			
 -- Q7
 -- List movie titles and average ratings, from highest-rated to lowest-rated. 
 -- If two or more movies have the same average rating, 
@@ -76,6 +80,7 @@ WHERE m.mID = r.mID
 GROUP BY m.title
 ORDER BY 2 DESC, 1;
 
+			
 -- Q8
 -- Find the names of all reviewers who have contributed three or more ratings. 
 -- (As an extra challenge, try writing the query without HAVING or without COUNT.) 
@@ -101,6 +106,7 @@ FROM (SELECT director
 		HAVING COUNT(*) > 1) t, Movie m
 WHERE m.director = t.director;
 
+	
 			
 -- Q10
 -- Find the movie(s) with the highest average rating. 
@@ -108,7 +114,6 @@ WHERE m.director = t.director;
 -- (Hint: This query is more difficult to write in SQLite than other systems; 
 -- you might think of it as finding the highest average rating 
 -- and then choosing the movie(s) with that average rating.) 
-
 
 SELECT title, AVG(stars) AS average
 FROM Movie
@@ -124,6 +129,7 @@ HAVING average = (
   )
 );
 
+			
 -- Q11
 -- Find the movie(s) with the lowest average rating. 
 -- Return the movie title(s) and average rating. 
@@ -144,6 +150,7 @@ HAVING average = (
     GROUP BY mId
   )
 );
+			
 
 -- Q12
 -- For each director, return the director's name together with the title(s) 
@@ -158,4 +165,4 @@ AND m1.director is not NULL;
 			
 			
                
-               
+              
