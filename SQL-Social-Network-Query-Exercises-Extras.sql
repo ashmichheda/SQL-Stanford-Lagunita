@@ -43,7 +43,19 @@ WHERE ID1 in (SELECT ID
 	      
 	      
 	      
-	      
+-- Q5
+-- Find the name and grade of the student(s) with the greatest number of friends. 
+
+
+SELECT name, grade
+FROM Highschooler INNER JOIN Friend F
+ON Highschooler.ID = F.ID1
+GROUP BY F.ID1
+HAVING COUNT(*) = (
+	SELECT MAX(COUNT_OF_FRIENDS)
+	FROM (SELECT COUNT(*) AS COUNT_OF_FRIENDS
+			FROM Friend
+			GROUP BY ID1));	      
 	      
 	      
 	      
