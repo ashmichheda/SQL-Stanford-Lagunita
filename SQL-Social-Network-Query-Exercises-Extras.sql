@@ -19,3 +19,11 @@ WHERE H1.grade not in (
 						WHERE H1.ID = F.ID1 AND H2.ID = F.ID2);
             
             
+
+-- Q3
+-- What is the average number of friends per student? (Your result should be just one number.) 
+
+SELECT AVG(COUNT_PER_STUDENT)
+FROM (	SELECT COUNT(*) AS COUNT_PER_STUDENT
+		FROM Friend 
+		GROUP BY ID1);
