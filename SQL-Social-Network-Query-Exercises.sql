@@ -31,3 +31,26 @@ FROM Highschooler H1, Highschooler H2, Likes L1, Likes L2
 WHERE (H1.ID = L1.ID1 AND H2.ID = L1.ID2) 
 AND (H2.ID = L2.ID1 AND H1.ID = L2.ID2) AND H1.name < H2.name
 ORDER BY H1.name, H2.name;
+
+
+-- Q4
+-- Find all students who do not appear in the Likes table (as a student who likes or is liked) 
+-- and return their names and grades. 
+-- Sort by grade, then by name within each grade.
+
+-- Approach: Take a union from 2 instances of Likes tables to get unique ID1 and ID2 
+-- Select IDs from Highschooler not from the UNION result obtained from above step.
+-- sort them by first grade and then name.
+
+SELECT name, grade
+FROM Highschooler
+WHERE ID not in (
+  SELECT DISTINCT ID1
+  FROM Likes
+  UNION
+  SELECT DISTINCT ID2
+  FROM Likes)
+ORDER BY grade, name;
+  
+  
+  
