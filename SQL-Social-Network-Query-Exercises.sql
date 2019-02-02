@@ -103,14 +103,12 @@ AND (H1.ID = F1.ID1 AND H3.ID = F1.ID2) AND (H2.ID = F2.ID1 AND H3.ID = F2.ID2);
 
 
 
+-- Q8
+-- Find the difference between the number of students in the school 
+-- and the number of different first names. 
 
-
-
-
-
-
-
-
+SELECT COUNT(*) -  COUNT(DISTINCT(name)) 
+FROM Highschooler;
 
 
 
