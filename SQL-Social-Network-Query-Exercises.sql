@@ -112,10 +112,12 @@ FROM Highschooler;
 
 
 
+-- Q9
+-- Find the name and grade of all students who are liked by more than one other student. 
 
-
-
-
-
-
-
+SELECT name, grade
+FROM Highschooler
+INNER JOIN Likes ON Highschooler.ID = Likes.ID2
+GROUP BY ID
+HAVING COUNT(*) > 1;
+				
