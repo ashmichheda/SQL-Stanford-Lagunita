@@ -1,3 +1,5 @@
+-- Practice Queries for video lectures of SQL_Stanford course
+
 -- No. of colleges applied to by each student
 SELECT student.id, name, count(distinct cName)
 from student, apply
