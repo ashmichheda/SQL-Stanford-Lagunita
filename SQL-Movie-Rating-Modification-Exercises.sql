@@ -10,7 +10,7 @@ INSERT INTO Reviewer values (209, 'Roger Ebert');
 insert into rating 
 select rid, mid, 5, null
 from reviewer, movie
-where name='James Cameron';
+where name = 'James Cameron';
 
 -- Q3
 -- For all movies that have an average rating of 4 stars or higher, add 25 to the release year. 
@@ -19,7 +19,7 @@ where name='James Cameron';
 UPDATE Movie
 SET year = year + 25
 WHERE Movie.mID in(SELECT mID 
-		FROM Rating 
+	FROM Rating 
         GROUP BY mID
         HAVING AVG(Stars) >= 4);
 	
